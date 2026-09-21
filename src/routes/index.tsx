@@ -7,6 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import soundStage from "@/assets/dustin-sound-stage.jpg";
+import portrait from "@/assets/dustin-cawood.jpg";
+import posterLincoln from "@/assets/poster-lincoln.jpg";
+import posterChasingIce from "@/assets/poster-chasing-ice.jpg";
+import posterWallE from "@/assets/poster-wall-e.jpg";
+import posterSuper8 from "@/assets/poster-super-8.jpg";
+import posterMissionImpossible from "@/assets/poster-mission-impossible.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,11 +29,11 @@ export const Route = createFileRoute("/")({
 });
 
 const credits = [
-  { title: "Lincoln", role: "Sound Effects Editor", year: "2012", code: "01", tone: "from-amber-950/80 to-neutral-950" },
-  { title: "Chasing Ice", role: "Sound Designer", note: "Academy Award® nominated", year: "2012", code: "02", tone: "from-sky-950/75 to-neutral-950" },
-  { title: "WALL·E", role: "Sound Editorial", year: "2008", code: "03", tone: "from-yellow-950/75 to-neutral-950" },
-  { title: "Super 8", role: "Sound Editorial", year: "2011", code: "04", tone: "from-emerald-950/65 to-neutral-950" },
-  { title: "Mission: Impossible – Ghost Protocol", role: "Sound Editorial", year: "2011", code: "05", tone: "from-red-950/75 to-neutral-950" },
+  { title: "Lincoln", role: "Sound Effects Editor", year: "2012", code: "01", poster: posterLincoln },
+  { title: "Chasing Ice", role: "Sound Designer", note: "Academy Award® nominated", year: "2012", code: "02", poster: posterChasingIce },
+  { title: "WALL·E", role: "Sound Editorial", year: "2008", code: "03", poster: posterWallE },
+  { title: "Super 8", role: "Sound Editorial", year: "2011", code: "04", poster: posterSuper8 },
+  { title: "Mission: Impossible – Ghost Protocol", role: "Sound Editorial", year: "2011", code: "05", poster: posterMissionImpossible },
 ];
 
 function Waveform({ compact = false }: { compact?: boolean }) {
@@ -78,7 +84,10 @@ function Index() {
 
       <section id="about" className="border-b border-border py-24 md:py-36">
         <div className="mx-auto grid max-w-[1320px] gap-12 px-5 md:grid-cols-[0.65fr_1.35fr] md:px-10">
-          <div><p className="section-label">01 / About</p></div>
+          <div>
+            <p className="section-label">01 / About</p>
+            <img src={portrait} alt="Portrait of Dustin Cawood" width={640} height={768} className="mt-8 aspect-[4/5] w-full max-w-xs border border-border object-cover" />
+          </div>
           <div>
             <h2 className="font-display text-4xl font-medium uppercase leading-[1.05] md:text-6xl">The story is seen.<br /><span className="text-muted-foreground">The feeling is heard.</span></h2>
             <div className="mt-10 grid gap-8 text-base leading-7 text-muted-foreground sm:grid-cols-2">
@@ -98,8 +107,9 @@ function Index() {
           <div className="grid gap-px bg-border md:grid-cols-2 lg:grid-cols-5">
             {credits.map((credit) => (
               <article key={credit.title} className="group relative min-h-[420px] overflow-hidden bg-card p-5 md:min-h-[500px]">
-                <div className={`absolute inset-0 bg-gradient-to-b ${credit.tone} opacity-65 transition-opacity duration-500 group-hover:opacity-90`} />
-                <div className="poster-grain absolute inset-0 opacity-30" />
+                <img src={credit.poster} alt={`${credit.title} poster`} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-neutral-950/50" />
+                <div className="poster-grain absolute inset-0 opacity-20" />
                 <div className="relative flex h-full flex-col justify-between">
                   <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.22em] text-muted-foreground"><span>{credit.code}</span><span>{credit.year}</span></div>
                   <div>
